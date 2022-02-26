@@ -2,3 +2,5 @@ import sys
 
 for line in sys.stdin:
     print(line,end='')
+
+# print문들 통해 출력하 때, 기본적으로 개행\n이 들어가있으므로 > end='' 추가 시, 개해 없이 공백만
