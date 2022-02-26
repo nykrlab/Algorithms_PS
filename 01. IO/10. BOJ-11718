@@ -1,0 +1,13 @@
+while True:
+    try:
+        str = input()
+    except:
+        break
+    print(str)    
+    
+    
+# while True:
+#    try:
+#        print(input())
+#    except:
+#        break    
