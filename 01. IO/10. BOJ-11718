@@ -5,9 +5,21 @@ while True:
         break
     print(str)    
     
-    
-# while True:
-#    try:
-#        print(input())
-#    except:
-#        break    
+   
+"""
+while True:
+    try:
+        print(input())
+    except:
+        break    
+"""
+
+"""
+for line in sys.stdin:
+     print(line,end='')
+"""
+ # print문들 통해 출력할 때, 
+ # 기본적으로 공백과 개행\n이 들어가있으므로 > sep='' end='' 추가 시, 개행과 공백 없이 
+ # end="" >> 개행 없이 공백만 그대로
+ # sep="" >> 사이 공백 없이 띄어쓰기 없이 출력됨
+ 
