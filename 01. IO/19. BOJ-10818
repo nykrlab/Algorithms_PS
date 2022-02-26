@@ -1,0 +1,15 @@
+n = int(input())
+a = list(map(int, input().split()))
+
+print(min(a), max(a))
+
+
+"""
+import sys
+
+n = int(sys.stdin.readline())
+d = list(map(int,sys.stdin.readline().split()))
+
+print(min(d),end = " ")
+print(max(d))
+"""
