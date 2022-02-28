@@ -15,3 +15,25 @@ else:
         dp[i] = max(dp[i-3]+stair[i-1]+stair[i], dp[i-2]+stair[i])  
 
     print(dp[n])
+    
+
+"""
+n = int(input())
+a=[0]*n
+
+for i in range(n): 
+  a[i]=int(input())
+
+dp = [0]*n
+dp[0]=a[0]
+dp[1]=max(a[0]+a[1],a[1])
+dp[2]=max(a[0]+a[2],a[1]+a[2])
+
+for i in range(3,n):
+    dp[i]=max(dp[i-2]+a[i],dp[i-3]+a[i-1]+a[i])
+
+print(dp[n-1])
+
+# can run in replit but not in BOJ
+# find the difference in 'n+1'
+"""
