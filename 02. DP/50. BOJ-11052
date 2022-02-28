@@ -1,0 +1,13 @@
+n = int(input()) # 사려는 카드 개수
+p = [0]+list(map(int,input().split())) # 각 카드 가격 >> 헷갈리지 않도록 [0] 붙이기
+
+# dp[i] = 카드 i개 구매하는 최대 가격
+# p[k] = 카드 k개 들어있는 카드팩 가격
+
+# 카드 i개 구매하는 최대비용 dp[i] = p[k]+dp[i-k]
+dp = [0 for _ in range(n+1)]
+
+for i in range(1,n+1):
+    for k in range(1,i+1):
+        dp[i]=max(dp[i],dp[i-k]+p[k])
+print(dp[i])
