@@ -2,7 +2,7 @@ n = int(input())
 a = list(map(int,input().split()))
 
 dp = [1 for i in range(n)]
-# dp = [0]*n 가능
+# dp = [1]*n 가능
 
 for i in range(n):
     for j in range(i):
