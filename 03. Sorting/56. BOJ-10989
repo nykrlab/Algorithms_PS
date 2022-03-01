@@ -1,0 +1,15 @@
+import sys
+
+n = int(input())
+list = [0]*10001
+
+for i in range(n):
+    input_num =int(sys.stdin.readline())
+    list[input_num]=list[input_num]+1
+    # 각 요소들마다 0 할당해놓고, 입력값 받을 때마다 그 입력값과 같은 인덱스에 +1
+    # 나중에 입력 다 받고나면 0보다 큰 요소 갖는 인덱스 찾아서 그 수만큼 인덱스 출력해주면 됨
+    
+for i in range(10001):
+    if list[i]!=0:
+        for j in range(list[i]):
+            print(i)
