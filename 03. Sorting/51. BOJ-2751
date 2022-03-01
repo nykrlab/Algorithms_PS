@@ -8,5 +8,10 @@ for _ in range(n):
 num.sort()
 # num = sorted(num) >> 시간 더 오래 걸림
 
+# sort() : 리스트만 가능
+# sorted() : 팀소트라 불리느 고성능 정렬알고리즘 > 리스트와 문자열 둘 다 적용 가능
+# sort()는 리턴 X 출력을 덮어씀 - 별ㄷ 추가 공간 필요 없음 / 변수에 담을 수 없음
+# sorted()는 정렬 결과 리턴하기 때문에 변수에 담을 수 있음
+
 for i in num:
     print(i)
