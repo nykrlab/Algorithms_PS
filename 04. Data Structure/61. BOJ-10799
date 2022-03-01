@@ -1,0 +1,16 @@
+bar_razor = list(input())
+answer = 0
+stack=[]
+
+for i in range(len(bar_razor)):
+  if bar_razor[i]=='(' : # 스택 쌓기
+    stack.append('(')    # ( 는 그냥 스택에 넣는다 
+  else:      # ) 는 두 가지 경우로 나뉨
+    if bar_razor[i-1]=='(':  # )가 나오고, 이전이 ( 였다면 레이저
+    # ()면 ( 를 pop하고 현재 스택에 있는 ( 개수만큼 값 더해줌
+      stack.pop()
+      answer+=len(stack)
+    else: # )가 나오고 이전도 ) 문자였다면, 쇠막대기 끄트머리
+      stack.pop()
+      answer+=1 # 끄트머리 막대기 부분 더해줌
+print(answer)
