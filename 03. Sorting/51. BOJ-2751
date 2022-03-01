@@ -1,0 +1,12 @@
+import sys
+
+n = int(input())
+num = []
+for _ in range(n):
+    num.append(int(sys.stdin.readline()))
+
+num.sort()
+# num = sorted(num) >> 시간 더 오래 걸림
+
+for i in num:
+    print(i)
