@@ -1,0 +1,6 @@
+A,B,C,D = map(str,input().split())
+
+intAB = int(A+B)
+intCD = int(C+D)
+
+print(intAB+intCD)
