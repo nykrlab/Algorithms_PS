@@ -15,7 +15,7 @@ print(lcm(a,b))
 """
 import math
 
-a,b = math(int,input().split())
+a,b = map(int,input().split())
 
 print(math.gcd(a,b))
 print(math.lcm(a,b))
