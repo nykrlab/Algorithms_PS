@@ -1,0 +1,30 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+array =[]
+for i in range(n):
+    x,y=map(int,input().split())
+    array.append([y,x])
+    # 위치 바꿔서 array에 대입
+s_array=sorted(array)
+
+for y,x in s_array: # 다시 거꾸로 출력
+    print(x,y)
+
+
+"""
+n = int(input())
+nums = []
+for i in range(n):
+  [a,b]=map(int,input().split())
+  nums.append([a,b])
+nums = sorted(nums, key=lambda x:(x[1],x[0]))
+# lambda 함수 이용 - 
+
+for i in range(n):
+  print(nums[i][0], nums[i][1])
+  
+  ### 시간 훨씬 길다 - lambda 함수 때문인 걸로 추정,,
+"""
+
