@@ -9,7 +9,7 @@ dx=[0,0,1,-1]
 dy=[1,-1,0,0] # 우좌하상
 
 def bfs(graph,a,b):
-  n=len(graph)
+  n=len(graph)  # 7 출력됨
   queue = deque()
   queue.append((a,b))
   graph[a][b]=0
