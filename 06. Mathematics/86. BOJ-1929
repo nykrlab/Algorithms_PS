@@ -16,3 +16,24 @@ def isprime(m,n):
       print(i)
 
 isprime(m,n)
+
+
+
+"""
+m,n=map(int,input().split())
+
+def isPrime(x):
+  if(x<2): #소수 판별 함수
+   return False #1은 소수 아니므로 false
+  for i in range(2,x):
+    if(x%i==0):
+      return False
+  return True
+
+  for i in range(m,n+1):
+    if(isPrime(i)):
+      print(i)
+
+# m과 n 사이 숫자 하나하나 확인
+# >> 시간 초과
+"""
