@@ -1,0 +1,40 @@
+# 최단경로 >> BFS 문제 !!!!!!
+# dfs인 줄 알았어요,, ㅜ
+
+# bfs >> queue 사용 !
+
+from collections import deque
+import sys
+#sys.setrecursionlimit(10000)
+
+n,m=map(int,input().split())
+field=[]
+
+for _ in range(n):
+  field.append(list(map(int,input())))
+
+def bfs(x,y):
+    dx=[1,-1,0,0]
+    dy=[0,0,1,-1]
+
+    q=deque()
+    q.append((x,y))
+
+    while q:
+      x,y=q.popleft()
+      for i in range(4):
+        nx=x+dx[i]
+        ny=y+dy[i]
+        if nx<0 or nx>=n or ny<0 or ny>=m:
+          continue
+
+        if field[nx][ny]==0: #벽 진행불가 
+          continue
+
+        if field[nx][ny]==1: #벽 아님 - 이동
+          field[nx][ny]=field[x][y]+1
+          q.append((nx,ny))
+
+    return field[n-1][m-1]
+  
+print(bfs(0,0))
