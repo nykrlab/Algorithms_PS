@@ -1,0 +1,18 @@
+# 에라토스테네스의 체
+
+m,n = map(int,input().split())
+
+def isprime(m,n):
+  n+=1
+  prime=[True]*(n)
+  for i in range(2,int(n**0.5)+1): 
+  # n의 제곱근까지만 검사
+    if prime[i]: #prime[i] true일 때
+      for j in range(2*i,n,i): 
+      # prime 내 i 배수들을 false로 변환
+        prime[j]=False
+  for i in range(m,n):
+    if i>1 and prime[i]==True:
+      print(i)
+
+isprime(m,n)
