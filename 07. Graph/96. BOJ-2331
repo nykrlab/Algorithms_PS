@@ -1,0 +1,18 @@
+# 수의 중복을 확인하고 중복 이전까지의 수열 길이 세기
+# 우왕 이렇게 복잡해보였던 문제를 이렇게 풀 수 있다니,, 신기해라 
+
+a,p=map(int,input().split()) #57 2
+
+nums=[a] #57
+
+while True:
+  tmp=0
+  for s in str(nums[-1]):  ## int인 57을 string으로 바꿔서 5와 7에 대해 루프 돈다
+    tmp+=int(s)**p
+
+  if tmp in nums:
+    break
+
+  nums.append(tmp)
+
+print(nums.index(tmp))
