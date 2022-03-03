@@ -1,0 +1,63 @@
+#n개 원판을 세번째 막대에 옮기기
+# 1단계 : n-1개의 원판을 1번에서 2번으로 옮기기 > 재귀적
+# 2단계 : 남은 한 개 원판을 1번에서 3번으로
+# 3단계 : 다시 n-1개 원판을 2번에서 3번으로
+
+import sys
+input=sys.stdin.readline
+
+def hanoi_tower(n,start,end): #n개 start1에서 end3로
+  if n==1:
+    print(start, end)
+    return
+  hanoi_tower(n-1,start,6-start-end) #step1
+  #n-1개 원판을 1번에서(start) 2번(6-start-end)으로 
+  print(start,end) #step2
+  hanoi_tower(n-1,6-start-end,end) #step3
+
+  n=int(input())
+  print(2**(n-1))
+  hanoi_tower(n,1,3)
+  
+
+"""
+n=int(input())
+def hanoi(n,a,b,c):
+  if n==1:
+    move.append([a,c])) #a to c
+  else:
+    hanoi(n-1,a,c,b)
+    move.append([a,c]) #a to c
+    hanoi(n-1,b,a,c)
+  move=[] #이동경로 담는 list
+  hanoi(int(input()),1,2,3) #function 실행
+
+  print(len(move)) #이동횟수
+  print('\n'.join([' '.join(str(i) for i in row) for row in move])) #이동경로 출력
+
+
+sum=1
+for i in range(n-1):
+  sum=sum*2+1
+print(sum)
+hanoi(n,1,2,3)
+"""
+
+"""
+#하노이
+def hanoi(n,a,b,c):
+  if n==1:
+    move.append([a,c])
+else:
+  hanoi(n-1,a,c,b)
+  move.append([a,c])
+  hanoi(n-1,b,a,c)
+move=[]
+hanoi(int(input()),1,2,3) #function 실행
+
+print(len(move)) #이동횟수
+print('\n'.join(' '.join(str(i) for i in row) for row in move])) #이동경로
+
+
+
+"""
