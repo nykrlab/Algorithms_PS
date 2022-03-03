@@ -1,0 +1,59 @@
+import sys
+
+n = int(sys.stdin.readline())
+sorted_location = []
+
+for _ in range(n):
+    x, y = list(map(int, sys.stdin.readline().split()))
+    sorted_location.append((x, y))
+sorted_location.sort() #x좌표 기준 오름차순 정렬
+
+def get_dist(a, b): # 두점 사이 거리 계산 
+    return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
+
+def solution(l, r): 
+    if l == r:      # 점들은 최소단위로 '분할' >> 최소 단위인 별 한 개 되었을 때(l=r)는
+                    # 거리 계산할 수 없으므로 무한대인 float('inf') 반환
+        return float('inf')
+    else:
+        m = (l + r) // 2
+        min_dist = min(solution(l, m), solution(m + 1, r)) # 기준 값 계산 
+        target_list = []
+
+        # 이제 m의 왼쪽 오른쪽을 탐색해나가면서 m의 x좌표와의 거리가 min_dist 미만인 점들을 후보로 넣음
+        for i in range(m, l-1, -1): # m에서 0되기 전 즉, 1까지 -1으로 for문 
+            if (sorted_location[i][0] - sorted_location[m][0]) ** 2 < min_dist:
+                target_list.append(sorted_location[i])
+                #최소 단위가 아닐 때에는 중앙 기준으로 왼쪽 오른쪽으로 나눈 영역에서의 최솟값과 중앙값 m=(m+r)//2를 걸쳐서 생성된 영역에서의 최솟값 이 세 개의 값 중 최솟값 반환 
+            else:
+                break
+
+        for j in range(m + 1, r + 1):  #m+1에서 r까지 
+            if (sorted_location[j][0] - sorted_location[m][0]) ** 2 < min_dist:
+                target_list.append(sorted_location[j])
+            else:
+                break
+                
+        target_list.sort(key=lambda x: x[1])
+
+        # 후보 점들을 y좌표 기준으로 정렬 lambda 함수 이용
+        # 후보군 내 두 점간 거리 계산
+        # 계산된 거리가 min_dist보다 작다면 min_dist를 최솟값으로 갱신 
+
+        for i in range(len(target_list) - 1):
+            for j in range(i + 1, len(target_list)):
+                if (target_list[i][1] - target_list[j][1]) ** 2 < min_dist:
+                    dist = get_dist(target_list[i], target_list[j])
+                    min_dist = min(min_dist, dist)
+                else:
+                    break
+        # 만약 계산된 거리가 min_dist보다 크거나 같다면 이후에 나오는 점들과의 거리도 min_dist보다 
+        # 크거나 같으므로 for문을 나간다 - y좌표로 이미 정렬되어 있음
+                  
+        return(min_dist)
+
+if len(sorted_location) != len(set(sorted_location)):
+    print(0)
+# 만약 같은 점 존재한다면 거리 최솟값은 0이므로 같은 점 존재하는지 확인 > 있다면 0 반환
+else:
+    print((solution(0, len(sorted_location) - 1)))
