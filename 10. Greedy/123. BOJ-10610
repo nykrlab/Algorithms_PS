@@ -1,0 +1,13 @@
+n = list(input()) #string으로 입력받음
+n.sort(reverse=True)
+sum=0
+
+#30의 배수가 되는 조건 = 1의 자리수가 0 & 각 자리 숫자 더했을 때 3으로 나누어 떨어짐
+
+for i in n:
+  sum+=int(i) # 각 자리 합 계산
+
+if sum%3 != 0 or '0' not in n:
+  print(-1)
+else:
+  print(''.join(n))
