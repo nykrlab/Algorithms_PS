@@ -1,0 +1,21 @@
+import sys
+input = sys.stdin.readline
+
+def check(num): # 미리 함수선언
+  num = list(str(num))
+  for i in num: 
+    if i in s : 
+      return False
+  return True
+
+n = int(input()) #목적지
+m = int(input()) #고장버튼수 
+s = list(input().split()) #고장버튼
+
+result = abs(n-100)
+
+for i in range(1000001):
+  if check(i): #고장버튼 아닌 경우
+    result = min(result, len(str(i))+abs(i-n))
+
+print(result)
