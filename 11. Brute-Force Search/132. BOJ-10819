@@ -1,22 +1,21 @@
-import itertools 
+# 넘 이해하고 싶다 dfs 내에서 dfs(depth+1), pop() 실행순서 알아보기
 
-n=int(input())
+def dfs(depth):
+    if depth == N: #6
+        res.append(sum(abs(li[i+1]-li[i]) for i in range(N-1)))
+        return ;
+    for i in range(N): #012345
+        if check[i]: #check[i]==1이면 continue
+            continue
+        li.append(nums[i])  #check[i]==0이면 [20]
+        check[i] = 1
+        dfs(depth+1) 
+        li.pop()
+        check[i] = 0
 
-input_arr=list(map(int,input().split())) # 20 1 15 8 4 10
-result = 0 #결과값 저장 변수
-
-
-def result_sol(arr): #리스트의 차 구하는 공식
-  global result
-
-  def_result=0 #각 원소의 차 저장
-  for i in range(len(arr)-1): #range(5)=01234
-    def_result += abs(arr[i]-arr[i+1]) #각 원소 차의 절댓값 합해감
-  result=max(result,def_result)
-  # 저장되어있는 결과값과 비교해서 더 큰 값을 대입
-
-for i in itertools.permutations(input_arr,n):
-#permutations 라이브러리 이용(입력받은 리스트의 원소중에서 N개를 뽑는다.)
-  result_sol(i)
-
-print(result)
+N = int(input())
+nums = list(map(int, input().split())) # 20 1 15 8 4 10
+li, res = [], []
+check = [0]*N
+dfs(0)
+print(max(res))
