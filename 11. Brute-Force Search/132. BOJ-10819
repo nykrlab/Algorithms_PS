@@ -1,0 +1,22 @@
+import itertools 
+
+n=int(input())
+
+input_arr=list(map(int,input().split())) # 20 1 15 8 4 10
+result = 0 #결과값 저장 변수
+
+
+def result_sol(arr): #리스트의 차 구하는 공식
+  global result
+
+  def_result=0 #각 원소의 차 저장
+  for i in range(len(arr)-1): #range(5)=01234
+    def_result += abs(arr[i]-arr[i+1]) #각 원소 차의 절댓값 합해감
+  result=max(result,def_result)
+  # 저장되어있는 결과값과 비교해서 더 큰 값을 대입
+
+for i in itertools.permutations(input_arr,n):
+#permutations 라이브러리 이용(입력받은 리스트의 원소중에서 N개를 뽑는다.)
+  result_sol(i)
+
+print(result)
