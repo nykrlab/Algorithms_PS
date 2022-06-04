@@ -1,0 +1,17 @@
+num = int(input())
+
+cnt = 0
+
+while num >= 0:
+    if num%5==0:
+        cnt += int(num//5)
+        print(cnt)
+        break
+    num-=3
+    cnt+=1
+else:
+    print(-1)
+    
+    
+# 경우의 수 4개 
+# 5로 나뉨 / 5와 3으로 나뉨 / 3으로 나뉨 / 5와 3으로 나눠지지 않음 
