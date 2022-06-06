@@ -4,6 +4,8 @@ dp = [0 for _ in range(n+1)]
 
 # 반복문 & 점화식 : DP Bottom-Up ) Tabulation
 
+# 비교할 기보 값 dp[i]를 -1 연산한 횟수로 고정 -> 이후 다른 값과 비교항 min값을 재설정 
+
 for i in range(2, n+1):
     dp[i] = dp[i-1]+1
     
