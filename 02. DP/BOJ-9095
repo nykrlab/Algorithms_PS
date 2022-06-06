@@ -1,0 +1,19 @@
+t = int(input())
+
+def solution(n):
+    if n==1:
+        return 1
+    elif n==2:
+        return 2
+    elif n==3:
+        return 4
+    else:
+        return solution(n-1)+solution(n-2)+solution(n-3)
+    
+for i in range(t):
+    n = int(input())
+    print(solution(n))
+
+
+# n 만드는 경우의 수 = (1)+(n-1)만드는경우의수 + (2)+(n-2)만드는경우의수 + (3)+(n-3)만드는경우의수
+# => sol(n) = sol(n-1) + sol(n-2) + sol(n-3)
