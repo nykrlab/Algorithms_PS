@@ -1,0 +1,50 @@
+n=int(input())
+
+for i in range(n):
+    stack=[]
+    a=input()
+    
+    for j in a:
+        if j=='(':
+            stack.append(j)
+        elif j==')':
+            if stack:
+            # 스택에 괄호가 있다면
+                stack.pop()
+            else:
+                print('NO')
+                break
+                
+    # break없이 for문 모두 수행했을 경우
+    else:
+        if not stack:
+        # 스택이 비어있다면 
+            print('YES')
+        else:
+            print('NO')       
+            
+            
+            
+################################################################################
+
+n = int(input())
+
+for i in range(n):
+    # input()으로 받고, list로 바꿔줌
+    b = input()
+    s = list(b)
+    
+    sum=0
+    for i in s:
+        if i=='(':
+            sum+=1
+        elif i==')':
+            sum-=1
+        if sum<0:
+            print('NO')
+            break
+    if sum>0:
+        print('NO')
+    elif sum==0:
+        print('YES')
+        
