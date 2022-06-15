@@ -1,0 +1,14 @@
+import sys
+
+n=int(input())
+word=[]
+for _ in range(n):
+    word.append(sys.stdin.readline().strip())
+
+# 중복 제거 위해 set 사용하여 재대입 
+word = list(set(word)) 
+
+# lambda 함수 이용해 정렬 
+word.sort(key=lambda x: (len(x),x))
+result = '\n'.join(word)
+print(result)
