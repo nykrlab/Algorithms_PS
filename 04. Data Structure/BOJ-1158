@@ -37,5 +37,6 @@ while people:
 
 print(str(result).replace('[', '<').replace(']', '>'))
 #print('<',end='')
-#print(res,sep=', ',end='')
+#print(*res,sep=', ',end='')
 #print('>')
+# >> error 
