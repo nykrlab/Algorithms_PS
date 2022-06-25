@@ -1,0 +1,34 @@
+# 함수 선언 
+def sol(depth, n, m):
+    if depth == m:    # 탈출조건
+        print(' '.join(map(str, out)))
+        return
+    for i in range(1, n+1):
+        if not visited[i]:    # 탐사 전일 때
+            visited[i] = True    # 탐사 체크
+            out.append(i)    # out에 저장
+            
+            sol(depth+1, n, m)    # 깊이우선탐색 DFS
+            
+            visited[i] = False    # 깊이탐사 완료 - 탐사 체크 해제
+            out.pop()    # out 원소 제거
+            
+            
+n, m = map(int, input().split())
+visited = [False] * (n+1)    # 방문여부 리스트
+out = []    # 방문한 수 넣을 리스트 선언
+            
+sol(0, n, m)
+
+
+
+
+###################
+
+import itertools
+
+n, m = map(int, input().split())
+arr = [i for i in range(1, n+1)]
+
+for i in itertools.permutations(arr, m):
+    print(' '.join(map(str, i)))
