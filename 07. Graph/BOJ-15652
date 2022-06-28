@@ -1,0 +1,14 @@
+n,m = map(int,input().split())
+out = []
+
+# 함수선언
+def sol(start):
+    if len(out)==m:	# 탈출조건
+        print((' ').join(map(str,out)))
+        return
+    for i in range(start, n+1):
+        out.append(i)
+        sol(i)
+        out.pop()
+        
+sol(1)
