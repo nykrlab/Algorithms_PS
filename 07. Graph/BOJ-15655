@@ -1,0 +1,22 @@
+n, m = map(int,input().split())
+nums = list(map(int,input().split()))
+
+nums.sort()
+# nums = sorted(list(map(int, input().split()))) 가능
+out = []
+
+# 함수선언
+def sol(start):
+    if len(out)==m:	# 탈출조건
+        print((' ').join(map(str,out)))
+        return
+    
+    for i in range(start, n):
+        if nums[i] not in out:	# 원소추가 조건
+            out.append(nums[i])
+            
+            sol(i+1)
+            
+            out.pop()
+            
+sol(0)
