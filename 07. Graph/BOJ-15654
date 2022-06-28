@@ -1,0 +1,21 @@
+n, m = map(int, input().split())
+nums = list(map(int, input().split()))
+
+nums.sort()
+visited = [0]*(n)
+out = []
+
+# 함수선언
+def sol(depth):
+    if len(out)==m:	# 탈출조건
+        print(' '.join(map(str,out)))
+        return
+    for i in range(n):
+        if not visited[i]:
+            visited[i] = True
+            out.append(nums[i])
+            sol(depth+1)
+            out.pop()
+            visited[i] = False
+
+sol(0)
