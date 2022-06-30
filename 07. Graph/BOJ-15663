@@ -1,0 +1,22 @@
+n,m = map(int,input().split())
+nums = sorted(list(map(int,input().split())))
+visited = [False]*n
+out = []
+
+# 함수선언
+def sol(depth):
+    if depth==m:	# 탈출조건
+        print(' '.join(map(str,out)))
+        return
+    overlap = 0
+    for i in range(n):
+    	# overlap 변수와 비교하여 이미 있는 배열은 제외함 
+        if not visited[i] and overlap!=nums[i]:
+            visited[i]=True
+            out.append(nums[i])
+            overlap = nums[i]
+            sol(depth+1)
+            visited[i]=False
+            out.pop()
+            
+sol(0)
