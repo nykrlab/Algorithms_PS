@@ -1,0 +1,19 @@
+n, m = map(int, input().split())
+L = list(map(int, input().split()))
+L.sort()
+out = []
+
+# 함수선언
+def sol(depth):
+    if depth == m:	# 탈출조건
+        print(' '.join(map(str, out)))
+        return
+    overlap = 0
+    for i in range(N):
+        if overlap != L[i]:
+            out.append(L[i])
+            overlap = L[i]
+            sol(depth+1)
+            out.pop()
+
+sol(0)
