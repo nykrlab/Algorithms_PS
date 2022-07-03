@@ -1,0 +1,39 @@
+nums = [0 for i in range(13)]
+
+def sol(start, depth):
+    if depth==6:
+        for i in range(6):
+            print(nums[i], end=' ')
+        #print(' '.join(map(str,nums))) -> error
+        print()
+        return
+    for i in range(start, len(arr)):
+        nums[depth]=arr[i]
+        sol(i+1, depth+1)
+        
+while True:
+    arr = list(map(int,input().split()))
+    if arr[0]==0:
+        break
+    del arr[0]
+    sol(0,0)
+    print()
+    
+    
+###############################################
+
+import itertools
+
+while True:
+    arr = list(map(int, input().split()))
+    
+    k = arr[0]
+    s = arr[1:]
+    
+    for i in itertools.combinations(s, 6):
+        print(*i)
+        
+    if k==0:
+        exit()
+        
+    print()
