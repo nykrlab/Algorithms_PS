@@ -1,14 +1,56 @@
-n= int(input())
-a=list(map(int,input().split()))
-rescnt=0
+n = int(input())
+nums = list(map(int, input().split()))
+end = max(nums)
 
-for i in a:
-  cnt=0
-  if(i==1): #1은 소수 아니므로 continue
-    continue
-  for j in range(2,i+1):
-    if(i%j==0):
-      cnt+=1
-  if(cnt==1):
-    rescnt+=1
-print(rescnt)
+check = [i for i in range(end+1)]    # 리스트의 인덱스와 값이 같도록
+check[1] = 0    # 0,1번째 인덱스는 0으로 지정 (소수 0개이므로)
+cnt = 0
+
+for i in check[2:]:	# i가 2~
+    if check[i]==0:	# 이미 지워졌으면 continue
+        continue
+    else:
+        for j in range(2, (end//i)+1):	# j가 2~(end//i)까지 돌기 위해 
+            if check[i*j]==0:	# 이미 지워졌으면 continue
+                continue
+            else:	# 배수 지우기
+                check[i*j]=0
+
+# 입력받은수인가? 전체수리스트에서_지워지지않았는가?(check!=0) 모두 만족 시 cnt+=1   
+for i in nums:
+    if i in check:
+        cnt+=1
+        
+print(cnt)
+
+
+####################################################################
+
+
+import math
+
+n = int(input())
+nums = list(map(int, input().split()))
+
+def sol(x):
+    # 전체 수를 넣은 리스트 지정 (소수는 1 이상으므로 1 제외)
+    natural_nums = list(range(2, x))
+    cnt = 0
+    
+    # i ) 2부터 루트(1000)까지 루프 돎 <- 에라토스테네스의 체
+    for i in range(2, int(math.sqrt(1000))):
+    
+    	# j는 전체 수(리스트)를 돌면서 
+        for j in natural_nums:
+            if j/i==1 :	# i==j인 경우(본인에 해당)는 지우지 않으므로 pass
+                pass
+            elif j%i==0:	# 배수는 전체수리스트 natural_nums에서 제거
+                natural_nums.remove(j)
+                
+    # 입력받은수인가? 전체수리스트에서_지워지지않았는가?(소수인가?) 모두 만족 시 cnt+=1          
+    for k in nums:
+        if k in natural_nums:
+            cnt+=1
+    print(cnt)
+    
+sol(1000)
