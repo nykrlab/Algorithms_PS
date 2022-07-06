@@ -1,0 +1,67 @@
+from itertools import combinations
+
+n = int(input())
+graph = [list(map(int, input().split())) for _ in range(n)]
+
+# 전 멤버 리스트 
+member_all = list(range(n))
+min_diff = int(1e9)
+
+def dfs():
+    global min_diff
+    # start 멤버 : 조합 통해 계산
+    for start_member in list((combinations(member_all, n//2))):
+        start_sum = link_sum = 0
+        # link 멤버 : 전 멤버 - start 멤버
+        link_member = list(set(member_all)-set(start_member))
+        
+        # 팀원조합 & 능력치 더하기 
+        for i, j in list(combinations(start_member, 2)):
+            start_sum += graph[i][j]
+            start_sum += graph[j][i]
+        for j, i in list(combinations(link_member, 2)):
+            link_sum += graph[i][j]
+            link_sum += graph[j][i]
+            
+        # 최솟값 갱신
+        min_diff = min(min_diff, abs(start_sum-link_sum))
+
+
+dfs()
+print(min_diff)
+
+
+################################################################################
+
+
+n = int(input())
+graph = [list(map(int, input().split())) for _ in range(n)]
+min_diff = int(1e9)
+visited = [False for _ in range(n)]
+
+def dfs(depth, idx):
+    global min_diff
+    # 팀이 나누어진 경우 능력치 합 연산 
+    if depth == n//2:
+        start_sum, link_sum = 0, 0
+        for i in range(n):
+            for j in range(n):
+            	# start팀
+                if visited[i] and visited[j]:
+                    start_sum += graph[i][j]
+                # link팀
+                elif not visited[i] and not visited[j]:
+                    link_sum += graph[i][j]
+        # 최솟값 갱신
+        min_diff = min(min_diff, abs(start_sum-link_sum))
+        return
+
+    # 팀원 조합 
+    for i in range(idx, n):
+        if not visited[i]:
+            visited[i] = True
+            dfs(depth+1, i+1)
+            visited[i] = False
+
+dfs(0, 0)
+print(min_diff)
