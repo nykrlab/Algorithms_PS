@@ -1,0 +1,28 @@
+from itertools import combinations
+
+n, m = map(int, input().split())
+graph = list(list(map(int, input().split())) for _ in range(n))
+result = 999999
+house = []
+chicken = []
+
+# graph 값이 1이면 house에 추가 / 2이면 chicken에 추가
+for i in range(n):
+    for j in range(n):
+        if graph[i][j]==1:
+            house.append([i, j])
+        elif graph[i][j]==2:
+            chicken.append([i, j])
+            
+            
+for chic in combinations(chicken, m):	#combinations 사용하여 치킨집 m개 정하는 조합 
+    chick_city = 0    # 도시의 치킨거리
+    for h in house:
+        chick_house = 999    # 각 집마다 치킨거리
+        for j in range(m):
+        	# 최솟값 갱신
+            chick_house = min(chick_house, abs(h[0]-chic[j][0])+abs(h[1]-chic[j][1]))
+        chick_city += chick_house
+    result = min(result, chick_city)
+    
+print(result)
