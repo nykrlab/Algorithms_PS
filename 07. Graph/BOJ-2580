@@ -1,0 +1,46 @@
+graph = [list(map(int, input().split())) for _ in range(9)]
+blank = [(i,j) for i in range(9) for j in range(9) if graph[i][j]==0]
+
+def check(i, j):
+    promising = [1,2,3,4,5,6,7,8,9]	# 1-9 모든 수
+    
+    # 행과 열에 대해 계산
+    for k in range(9):
+        if graph[i][k] in promising:
+            promising.remove(graph[i][k])
+        if graph[k][j] in promising:
+            promising.remove(graph[k][j])
+            
+    # 정사각형에 대해 계산        
+    i //= 3
+    j //= 3
+    for p in range(i*3, (i+1)*3):
+        for q in range(j*3, (j+1)*3):
+            if graph[p][q] in promising:
+                promising.remove(graph[p][q])
+                
+    return promising	# 행,열,정사각형 모두 확인 후, 가능한 수 return
+
+flag = False    # 답 출력여부 확인
+
+
+def dfs(x):
+    global flag
+    
+    if flag:    # 이미 답이 출력된 경우
+        return
+    if x==len(blank):    # blank에 남은 0이 없는 경우 
+        for row in graph:
+            print(*row)
+        flag = True    # 답 출력
+        return
+    else:
+        (i, j) = blank[x]    # 0의 위치
+        promising = check(i, j)    # 0에 들어갈 수 리스트  
+        
+        for num in promising:
+            graph[i][j] = num
+            dfs(x+1)    # 다음 0으로 넘어감
+            graph[i][j] = 0    # 초기화 (정답 없을 경우 대비)
+            
+dfs(0)
