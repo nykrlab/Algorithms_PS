@@ -1,26 +1,21 @@
-r = 1000000
+from sys import stdin
 
-arr = [True for _ in range(r)]
+arr = [True]*1000001
 
-for i in range(2,int(r**0.5)+1): #에라토스테네스의 체
-  if arr[i]:
-    for k in range(2*i,r,i):
-        if arr[k]==True:
-            arr[k]=False
-# 소수에 해당하는 값만 true 가지고 있음
-      
-import sys 
-input=sys.stdin.readline
+for i in range(2, int(1000001**0.5)):
+    if arr[i]:
+        for j in range(2*i, 1000001, i):
+            arr[j]=False
 
 while True:
-  n=int(input())
-  if n==0:break
-
-  for i in range(3,len(arr)):
-    if arr[i]==True:
-      if arr[n-i]:
-        print(n,'=',i,'+',n-i)
+    n = int(stdin.readline()) # int(input()) 사용 시 시간 10배 증가함 
+    if n==0:
         break
+    for i in range(3, len(arr)):
+        if arr[i] and arr[n-i]:
+            print(n,"=",i,"+",n-i)
+            break
+            
 
     # i가 작은수부터 시작이므로 arr[i]와 arr[n-i]가 
     # 둘 다 arr에 존재할 경우, 해당 값 출력하고 바로 break 
