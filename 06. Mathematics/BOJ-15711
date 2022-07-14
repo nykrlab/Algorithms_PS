@@ -1,0 +1,50 @@
+import sys
+input = sys.stdin.readline
+
+t = int(input())
+num = 2000000
+arr = [False, False]+[True]*(num-1)
+
+# 에라토스테네스의 체
+for i in range(2, num+1):
+    if arr[i]:
+        for j in range(2*i, num, i):
+            arr[j]=False
+
+# 소수 리스트 생성
+primeNum = [i for i,j in enumerate(arr) if j==True and i>=2]
+
+# 소수의 합으로 나타낼 수 있는지 확인하는 함수 정의
+def isPrime(x):
+	# x가 2,000,000보다 클 때 : 소수들의 합으로 나타낼 수 있는지 연산
+    if x>num:
+        for prime in primeNum:
+            if prime >= x:
+                break
+            elif x%prime==0:
+                return False
+        return True
+    
+    # x가 2000000보다 작을 때, 위에서 구한 arr배열 통해 소수인지 바로 확인가능 
+    else:
+        return arr[x]
+    
+for _ in range(t):
+    m, n = map(int, input().split())
+    sum = m+n
+    
+    # 4 미만인 경우, 모두 불가능
+    if sum<4:
+        print('NO')
+    
+    # 4 이상의 짝수인 경우, 두 소수의 합으로 표시할 수 있음 (골드바흐의 추측 이용)
+    elif sum%2==0:
+        print('YES')
+    
+    # 4 이상의 홀수인 경우
+    else:
+    	# "홀수 = 홀수 + 짝수"이므로 sum에서 2를 뺀 수가 소수인지만 판별하면 됨
+        if isPrime(sum-2):
+            print('YES')
+        else:
+            print('NO')
