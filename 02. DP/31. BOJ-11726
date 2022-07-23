@@ -22,3 +22,17 @@ else:
         dp[i] = dp[i-1]+dp[i-2]
     print(dp[i]%10007)
 """
+
+
+n = int(input())
+dp = [0]*1001
+
+dp[0]=0
+dp[1]=1
+dp[2]=2
+
+if n>=3:
+    for i in range(3, n+1):
+        dp[i] = dp[i-2]+dp[i-1] # dp[i-2] : 누운 블럭만 고려하므로 *2 하지 않음 ! (dp[i-1]과 겹치므로)
+        
+print(dp[n]%10007)
