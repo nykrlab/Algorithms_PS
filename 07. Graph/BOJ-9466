@@ -1,0 +1,51 @@
+import sys
+# 재귀 횟수 제한
+sys.setrecursionlimit(10**7)
+input = sys.stdin.readline
+
+# dfs 함수 정의
+def dfs(x):
+    global ans
+    # 방문처리
+    visited[x] = True
+    # 방문한 학생(숫자)를 cycle에 append
+    cycle.append(x)
+    # 해당 학생이 선택한 학생(숫자)을 num 변수에 지정해줌
+    num = arr[x]
+    
+    # 선택한 학생(숫자)에 이미 방문했을 경우
+    if visited[num]:
+    	# 사이클에도 존재할 경우 (사이클 완성을 의미)
+        if num in cycle:
+        	# answer 리스트를 갱신
+            ans += cycle[cycle.index(num):]
+        return
+        
+    # 선택한 학생(숫자)에 아직 방문 않았을 경우
+    else:
+    	# 해당 학생(숫자)에 dfs
+        dfs(num)
+  
+
+# 테스트케이스 개수
+t = int(input())
+
+for _ in range(t):
+	# 학생 수 
+    n = int(input())
+    # 학생이 선택한 학생(숫자) 입력 받음
+    arr = [0] + list(map(int, input().split()))
+    # 방문리스트 
+    visited = [False]*(n+1)
+    # answer 리스트
+    ans = []
+    
+    # 1번부터 n번까지 학생 - for문
+    for i in range(1, n+1):
+    	# 방문 전이라면
+        if not visited[i]:
+        	# cycle 리스트 갱신
+            cycle = []
+            dfs(i)
+            
+    print(n - len(ans))
