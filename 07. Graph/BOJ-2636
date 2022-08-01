@@ -1,52 +1,46 @@
-import sys
-from collections import deque
-input = sys.stdin.readline
+import collections
 
-n,m = map(int,input().split())
-graph = []
-for i in range(n):
-    graph.append(list(map(int,input().split())))
-
-dx = [1,-1,0,0]
-dy = [0,0,1,-1]
-ans = []
+n, m = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(n)]
 
 def bfs():
-    q = deque()
-    q.append([0,0])
-    visited[0][0] = 1
-    cnt = 0
-    # 한번 while문 끝날 때마다 1시간 지남
-    while q:
-        x,y = q.popleft()
+    queue = collections.deque()
+    queue.append((0,0))
+    check = [[False] * m for _ in range(n)]
+    dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]    # 상하좌우
+    count = 0	# 남은 치즈조각 개수
+    
+    while queue:
+        x, y = queue.popleft()
+        # 상하좌우 탐색 
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0<=nx<n and 0<=ny<m and visited[nx][ny]==0:
-                if graph[nx][ny] == 0:
-                    visited[nx][ny] = 1
-                    # 치즈가 아닌 부분만 q에 
-                    # 가장자리만 체크해주기 위함
-                    q.append([nx,ny])
+            if 0 <= nx < n and 0 <= ny < m:
+                # 치즈 아님 & 방문 전
+                if graph[nx][ny] == 0 and check[nx][ny] == False:
+                    check[nx][ny] = True    # 방문처리
+                    queue.append((nx,ny))    # queue에 append
+                # 만나는 1들은 모두 가장자리 !
                 elif graph[nx][ny] == 1:
-                    # 중요
-
-                    # 가장자리 부분만 처리해주기때문에 만약에 공기와 접촉한 칸은 q에 넣어주지않음
-                    # 넣게되면 안쪽 치즈까지 녹음 처리되므로
+                    # 0으로 바꿔줘 녹음 처리 
+                    # queue에는 넣지 않음 - 넣으면 ) 이번 while문에서 안쪽 치즈까지 녹음처리되므로 
                     graph[nx][ny] = 0
-                    visited[nx][ny] = 1
-                    cnt += 1
-    ans.append(cnt)
-    return cnt
+                    count += 1    # 가장자리 개수 세기 
+                    check[nx][ny] = True    # 방문처리
+    return count
 
+result = []
 time = 0
-while 1:
-    time +=1
-    # 특수한 경우이기 때문에 0,1 밖에 없긴하지만 visited 리스트를 하나 만들어준다.
-    # 0을 1로 바꾸거나 1을 0으로 바꾸면 방문처리가 되지만, 그렇게되면 bfs특성상 다르게 구현됨
-    visited = [[0]*m for _ in range(n)]
-    cnt = bfs() 
-    if cnt == 0:
+while True:
+    count = bfs()    # 가장자리 개수 return 
+    result.append(count)
+    if count == 0:    # count(가장자리 개수)가 0 = 모든 치즈가 녹음 ! -> break
         break
-print(time-1)
-print(ans[-2])
+    time += 1    # count 존재 시, 1일 추가 처리
+
+# 녹아서 없어지는 데 걸리는 시간 출력
+print(time)
+
+# 한시간 전 count를 출력 = result[-2]
+print(result[-2])
