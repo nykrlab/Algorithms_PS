@@ -1,14 +1,16 @@
 n = int(input())
-a = []
-d = [0]*(n)
-for i in range(n):
-    a.append(int(input()))
-d[0]=a[0]
-d[1]=a[1]+a[0]
-d[2]=max(a[2]+a[0],a[2]+a[1],d[1])
 
-# 경우의 수 쓰면서 생각해보기 ) dp 배열과 기존 배열 
-for i in range(3,n):
-    d[i]=max(a[i]+d[i-2],a[i]+a[i-1]+d[i-3],d[i-1])
+wine = [0]*10000
+for i in range(n):
+    wine[i] = int(input())
     
-print(d[n-1])
+dp = [0]*10000
+dp[0] = wine[0]
+dp[1] = wine[0]+wine[1]
+dp[2] = max(wine[2]+wine[0], wine[2]+wine[1], dp[1])
+
+for i in range(3, n):
+    dp[i] = max(wine[i]+dp[i-2], wine[i]+wine[i-1]+dp[i-3], dp[i-1])
+    # max ( 전전와인을마시고n번째와인마시는경우 or 전와인마시고n번째와인마시는경우 or n번째_이번와인마시지않는경우 )
+    
+print(max(dp))
