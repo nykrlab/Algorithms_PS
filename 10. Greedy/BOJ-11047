@@ -1,0 +1,17 @@
+n, k = map(int, input().split())
+coin_list = []
+cnt = 0
+
+for i in range(n):
+    coin_list.append(int(input()))
+
+# n-1부터 0까지 거꾸로 for문 돌림
+for i in range(n-1, -1, -1):
+    if coin_list[i] > k:
+        continue
+    # 동전 개수 카운팅
+    cnt += k//coin_list[i]
+    # k값 갱신
+    k %= coin_list[i]
+    
+print(cnt)
