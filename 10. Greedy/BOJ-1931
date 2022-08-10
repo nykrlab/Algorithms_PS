@@ -31,3 +31,27 @@ for s, e in time:
         end=e
         
 print(ans)
+
+
+###################################################
+
+
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+time = [list(map(int, input().split())) for _ in range(n)]
+
+# lambda 함수 이용하여 - 끝나는 시간, 시작시간 순으로 정렬 
+time.sort(key=lambda x:(x[1],x[0]))
+
+ans = end = 0
+
+# for문 돌면서 시작시간, 끝시간 -> s, e로 입력받음
+# end값 갱신 
+for s, e in time:
+    if s>=end:
+        ans+=1
+        end=e
+        
+print(ans)
