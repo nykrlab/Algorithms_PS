@@ -1,9 +1,13 @@
 n = int(input())
-a = list(map(int, input().split()))
-dp = [0 for i in range(n)]
+arr = list(map(int, input().split()))
+
+# 기본 값 설정 
+dp = [1]*n
+
 for i in range(n):
     for j in range(i):
-        if a[i] > a[j] and dp[i] < dp[j]:
-            dp[i] = dp[j]
-    dp[i] += 1
+        if arr[j]<arr[i]:
+	    # 값 갱신 
+            dp[i] = max(dp[i],dp[j]+1)
+            
 print(max(dp))
