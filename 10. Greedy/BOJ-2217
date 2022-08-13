@@ -1,0 +1,22 @@
+import sys
+# sys.stdin.readline 아닌, 일반 input() 사용 시 4744ms 시간 소요됨
+input = sys.stdin.readline
+
+n = int(input())
+
+# 중량 
+rope = []
+result = []
+
+for i in range(n):
+    rope.append(int(input()))
+    
+# 내림차순 정렬 
+rope.sort(reverse=True)
+
+for j in range(n):
+	# 해당 경우의 수 최댓값 입력 
+    result.append(rope[j]*(j+1))
+ 
+# result 리스트 내 최댓값 
+print(max(result))
