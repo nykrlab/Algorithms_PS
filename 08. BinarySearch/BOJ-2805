@@ -3,19 +3,26 @@
 import sys
 input = sys.stdin.readline
 
+# 나무의 수 / 가져가려는 나무 길이 
 n, m = map(int, input().split())
 trees = list(map(int, input().split()))
 
 start, end = 0, max(trees)
 
 while start<=end:
+    # mid값 갱신 
     mid = (start+end)//2
     tree = 0
+    
+    # 가져갈 수 있는 나무 길이 계산 
     for i in trees:
         if i>mid:
             tree += i-mid
+            
+    # 주어진 m값과 비교하여 이분탐색    
     if tree>=m:
         start = mid+1
     else:
         end = mid-1
+        
 print(end)
