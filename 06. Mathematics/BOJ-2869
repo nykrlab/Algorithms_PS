@@ -1,0 +1,8 @@
+A, B, V = map(int, input().split())
+
+if (V-B)%(A-B) == 0:	# day값 계산
+    day = (V-B)//(A-B)
+    print(day)
+else :	# 나눈 나머지가 0이 아니라면 하루가 더 필요하다고 판단 : +1
+    day = (V-B)//(A-B)
+    print(day+1)
