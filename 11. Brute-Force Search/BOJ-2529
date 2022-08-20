@@ -1,33 +1,79 @@
-n = int(input())
-ine_sing = list(map(str,input().split()))
+##########################################
+# 재귀 이용
 
-visited = [0]*10
-max_ans =""
-min_ans =""
+# 부등호 만족 확인 함수
+def good(x, y, op):
+    if op=='<':
+        if x > y :
+            return False
+    if op=='>':
+        if x < y :
+            return False
+    return True
 
-def check(i,j,k):
-    if k=='<':
-        return i<j
-    else:
-        return i>j
-
-def solve(idx,s):
-    global max_ans,min_ans
-
-    if(idx==n+1):
-        if(len(min_ans)==0):
-            min_ans = s
-        else:
-            max_ans = s
+# 전체 부등호 만족 확인 - result 함수에 append
+def solve(index, num):
+    if index==n+1:
+        result.append(num)
         return
     for i in range(10):
-        if(visited[i]==0):
-            if(idx==0 or check(s[-1],str(i),ine_sing[idx-1])):
-                visited[i]=True
-                solve(idx+1,s+str(i))
-                visited[i]=False
+        if check[i]:
+            continue
+        if index==0 or good(num[index-1], str(i), signs[index-1]):
+            check[i] = True	# 방문처리
+            solve(index+1, num+str(i))	# 매개변수 변경하여 - dfs
+            check[i] = False	# 방문처리 취소
+            
+            
+n = int(input())
+signs = input().split()
+
+result = []
+check = [False]*10	 # 방문처리 위한 리스트
+
+solve(0, '')
+result.sort()	# 완성된 result 리스트 정렬
+
+print(result[-1])    #최댓값
+print(result[0])    #최솟값
 
 
-solve(0,"")
-print(max_ans)
-print(min_ans)
+
+##########################################
+# 순열 이용
+
+# 순열 사용
+from itertools import permutations
+
+k = int(input())
+signs = input().split()
+
+result = []
+
+# k+1 개의 순열 찾는 함수
+for per in permutations([0,1,2,3,4,5,6,7,8,9], k+1):
+    flag = True
+    for i in range(len(signs)):
+    
+    	# '<' 부등호 만족 시 continue, 그렇지 않은 경우 break
+        if signs[i]=='<':
+            if per[i]<per[i+1]:
+                continue
+            else:
+                flag = False
+                break
+        # '>' 부등호 만족 시 continue, 그렇지 않은 경우 break
+        else:
+            if per[i]>per[i+1]:
+                continue
+            else:
+                flag = False
+                break
+                
+    # flag 값이 참이면 result에 추가            
+    if flag:
+        result.append(per)
+
+# 최댓값, 최솟값 print
+print(''.join(map(str, list(max(result)))))
+print(''.join(map(str, list(min(result)))))
