@@ -1,0 +1,21 @@
+import heapq
+import sys
+
+input = sys.stdin.readline
+
+n = int(input())
+heap = []
+
+for _ in range(n):
+
+    x = int(input())
+    
+    if x==0:	# 0이 입력됐을 때
+        if not heap:	# 배열이 비어있는 경우, 0 출력
+            print(0)
+        else:	# 배열이 존재하는 경우, 배열에서 가장 작은 값 출력하고 / 그 값을 배열에서 제거
+            print(heapq.heappop(heap))
+            
+            
+    else:	# 자연수가 입력됐을 때, 자연수를 heap에 추가
+        heapq.heappush(heap, x)
