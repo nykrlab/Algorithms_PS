@@ -1,0 +1,42 @@
+# dfs 두번 이용해 O(n) 시간복잡도로 구현 가능
+
+# 1) 루트 노드에서 가장 먼 노드 A 찾기
+# 2) 루트 노드에서 가장 먼 노드 A에서 가장 먼 노드 B 찾기
+# 3) 루트 노드에서 가장 먼 노드 A ~ 가장 먼 노드 B = 트리의 지름
+
+import sys
+sys.setrecursionlimit(10 ** 9)
+
+# dfs 탐색
+def dfs(x, wei):    # 시작노드번호, 현재노드가중치
+    
+    # 반복문 - 현재 노드와 연결된 노드, 연결된 노드의 가중치 확인
+    for a,b in graph[x]:
+        
+        # 탐색하지 않은 노드라면 탐색
+        if visited[a] == -1:
+            visited[a] = wei+b    # 이전 노드의 가중치와 현재 노드의 가중치를 더한다
+            dfs(a, wei+b)
+            
+n = int(sys.stdin.readline())
+
+graph = [[] for _ in range(n+1)]
+for _ in range(n-1):
+    a, b, c = map(int, sys.stdin.readline().split())
+    graph[a].append([b,c])
+    graph[b].append([a,c])
+    
+visited = [-1] * (n+1)    # 탐색 확인, 가중치 확인
+# [0]*(n+1)로 초기화 할 경우 -> visited[1]=0에서 계산됨
+visited[1] = 0    # 시작노드는 가중치를 0으로 초기화
+dfs(1,0)    # 첫번째 노드를 dfs 탐색 
+
+# 위에서 찾은 노드에 대한 가장 먼 노드 찾기
+start = visited.index(max(visited))
+
+visited = [-1]*(n+1)    # 탐색 확인, 가중치 확인
+visited[start] = 0    # 가장 먼 노드의 가중치를 0으로 초기화
+dfs(start, 0)    # 가장 먼 노드를 dfs 탐색
+
+# 트리의 지름 출력
+print(max(visited))
