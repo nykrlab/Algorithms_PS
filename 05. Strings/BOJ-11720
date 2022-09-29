@@ -1,0 +1,31 @@
+# input() 자체가 입력을 string 형식을 받음
+
+# 1.
+n = int(input())
+arr = input()
+
+sum = 0
+
+# 문자열에 for문 사용 > sum할 때 int처리
+for i in arr:
+    sum += int(i)
+    
+print(sum)
+
+
+# 2.
+n = int(input())
+sum = 0 
+
+nums = input()
+
+# n만큼 for문 돌기 - index 사용
+for i in range(n):
+    sum += int(nums[i])
+    
+print(sum)
+
+
+# 3. sum 함수 사용
+n = int(input())
+print(sum(map(int, input())))
