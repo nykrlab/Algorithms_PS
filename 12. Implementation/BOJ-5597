@@ -1,0 +1,23 @@
+# 1 ) 0으로 초기화 - 낸 학생 1로 갱신 - for문 통해 아직 0인 학생 출력 // 68ms
+
+students = [0]*31
+
+for _ in range(28):
+    submit = int(input())
+    students[submit] = 1
+
+for i in range(1,31):
+    if students[i]==0:
+        print(i)
+        
+        
+# 2 ) 1~30까지 갑 리스트 - 낸 학생 제거 remove() - min, max 출력 // 80ms
+
+students = [i for i in range(1,31)]
+
+for _ in range(28):
+    submit = int(input())
+    students.remove(submit)
+    
+print(min(students))
+print(max(students))
